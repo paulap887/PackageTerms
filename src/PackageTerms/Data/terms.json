@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-11-02",
+  "entries": [
+    {
+      "id": "polly-osmf",
+      "name": "Polly",
+      "packages": [ "Polly", "Polly.Core" ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[9.0.0-0, )",
+      "effectiveDate": "2026-11-16",
+      "lastFreeVersion": "8.x (all existing versions)",
+      "appliesTo": "direct",
+      "summary": "Polly adopts the Open Source Maintenance Fee. The fee applies only to the next major version released after 16 Nov 2026; existing versions stay free. The source licence (BSD-3-Clause) doesn't change.",
+      "whoPays": "Companies earning at least US$20,000 from a product or project that uses Polly: US$20 per month. Direct references only; Polly brought in by another library (for example Microsoft.Extensions.Http.Resilience) is exempt.",
+      "source": "https://thepollyproject.org/2026/07/14/polly-osmf-announcement.html",
+      "alternatives": [
+        { "package": "Microsoft.Extensions.Http.Resilience", "note": "Microsoft's resilience package uses Polly transitively, which the fee doesn't cover (MIT)." },
+        { "package": "Polly 8.x", "note": "Stay on the current major version; existing versions are not subject to the fee." }
+      ]
+    },
+    {
+      "id": "mediatr-commercial",
+      "name": "MediatR",
+      "packages": [ "MediatR" ],
+      "kind": "commercial",
+      "affectedVersions": "[13.0.0-0, )",
+      "effectiveDate": "2025-07-02",
+      "lastFreeVersion": "12.5.0",
+      "appliesTo": "any",
+      "summary": "From v13, MediatR is dual-licensed under RPL-1.5 and the Lucky Penny Software commercial licence. Earlier versions keep their original Apache-2.0 terms.",
+      "whoPays": "A paid licence is needed for commercial use above the free Community edition: free for companies under US$5M gross annual revenue, non-profits under US$5M budget, education and non-production use. A licence key is required either way.",
+      "source": "https://www.jimmybogard.com/automapper-and-mediatr-commercial-editions-launch-today/",
+      "alternatives": [
+        { "package": "Mediator.SourceGenerator", "note": "Source-generated mediator by Martin Othamar (MIT)." },
+        { "package": "MediatR 12.5.0", "note": "Last Apache-2.0 release." }
+      ]
+    },
+    {
+      "id": "automapper-commercial",
+      "name": "AutoMapper",
+      "packages": [ "AutoMapper" ],
+      "kind": "commercial",
+      "affectedVersions": "[15.0.0-0, )",
+      "effectiveDate": "2025-07-02",
+      "lastFreeVersion": "14.0.0",
+      "appliesTo": "any",
+      "summary": "From v15, AutoMapper is dual-licensed under RPL-1.5 and the Lucky Penny Software commercial licence. Earlier versions keep their original MIT terms.",
+      "whoPays": "A paid licence is needed for commercial use above the free Community edition: free for companies under US$5M gross annual revenue, non-profits under US$5M budget, education and non-production use. A licence key is required either way.",
+      "source": "https://www.jimmybogard.com/automapper-and-mediatr-commercial-editions-launch-today/",
+      "alternatives": [
+        { "package": "Riok.Mapperly", "note": "Source-generated object mapper (Apache-2.0)." },
+        { "package": "Mapster", "note": "Object mapper with code generation (MIT)." },
+        { "package": "AutoMapper 14.0.0", "note": "Last MIT release." }
+      ]
+    },
+    {
+      "id": "masstransit-commercial",
+      "name": "MassTransit",
+      "packages": [ "MassTransit" ],
+      "packagePrefixes": [ "MassTransit." ],
+      "kind": "commercial",
+      "affectedVersions": "[9.0.0-0, )",
+      "effectiveDate": "2026-01-06",
+      "lastFreeVersion": "8.5.12",
+      "appliesTo": "any",
+      "summary": "MassTransit v9 is a commercial product from Massient; v9 packages use the Massient licence. The v8 line remains Apache-2.0.",
+      "whoPays": "Commercial use of v9 requires a Massient licence key; see massient.com for terms.",
+      "source": "https://masstransit.massient.com/introduction/v9-announcement",
+      "alternatives": [
+        { "package": "MassTransit 8.x", "note": "Apache-2.0 line, still receiving patch releases (8.5.12 at the time of writing)." },
+        { "package": "Rebus", "note": "Service bus (MIT)." },
+        { "package": "WolverineFx", "note": "Messaging and mediator framework (MIT)." }
+      ]
+    },
+    {
+      "id": "fluentassertions-commercial",
+      "name": "FluentAssertions",
+      "packages": [ "FluentAssertions" ],
+      "kind": "commercial",
+      "affectedVersions": "[8.0.0-0, )",
+      "effectiveDate": "2025-01-14",
+      "lastFreeVersion": "7.2.2",
+      "appliesTo": "any",
+      "summary": "From v8, FluentAssertions uses the Xceed Community Licence for non-commercial use; commercial use needs a paid Xceed licence. v7 remains Apache-2.0.",
+      "whoPays": "Any commercial use of v8+ requires a paid licence from Xceed (per developer, per year).",
+      "source": "https://www.nuget.org/packages/FluentAssertions/8.0.0/license",
+      "alternatives": [
+        { "package": "AwesomeAssertions", "note": "Community fork of FluentAssertions v7 (Apache-2.0)." },
+        { "package": "Shouldly", "note": "Assertion library (BSD-3-Clause)." },
+        { "package": "FluentAssertions 7.2.2", "note": "Last Apache-2.0 release." }
+      ]
+    }
+  ]
+}

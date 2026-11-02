@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <RollForward>Major</RollForward>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>package-terms</ToolCommandName>
+    <PackageId>PackageTerms</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Paul Thomas</Authors>
+    <Description>Finds NuGet dependencies whose terms changed: packages that went commercial or added a maintenance fee (Polly, MediatR, AutoMapper, MassTransit, FluentAssertions…). Shows whether you're affected, the last free version and free alternatives.</Description>
+    <PackageTags>nuget;license;licence;compliance;dependencies;polly;osmf;mediatr;automapper;dotnet-tool</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/paulap887/PackageTerms</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/paulap887/PackageTerms</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.Versioning" Version="7.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\terms.json" LogicalName="PackageTerms.terms.json" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
