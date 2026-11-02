@@ -11,12 +11,13 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>package-terms</ToolCommandName>
     <PackageId>PackageTerms</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Paul Thomas</Authors>
     <Description>Finds NuGet dependencies whose terms changed: packages that went commercial or added a maintenance fee (Polly, MediatR, AutoMapper, MassTransit, FluentAssertions…). Shows whether you're affected, the last free version and free alternatives.</Description>
     <PackageTags>nuget;license;licence;compliance;dependencies;polly;osmf;mediatr;automapper;dotnet-tool</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/paulap887/PackageTerms</PackageProjectUrl>
     <RepositoryUrl>https://github.com/paulap887/PackageTerms</RepositoryUrl>
   </PropertyGroup>
@@ -28,6 +29,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\terms.json" LogicalName="PackageTerms.terms.json" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
