@@ -1,0 +1,35 @@
+name: Publish to NuGet
+
+# Runs when a version tag such as v0.1.0 is pushed.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets nuget.org trusted publishing exchange the GitHub OIDC token for a temporary API key
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - run: dotnet test -c Release
+
+      - name: Pack (version from the tag)
+        run: dotnet pack src/PackageTerms -c Release -o artifacts -p:Version=${GITHUB_REF_NAME#v}
+
+      - name: NuGet login (OIDC → temporary API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: paulap887
+
+      - name: Push to nuget.org
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
