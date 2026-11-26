@@ -11,6 +11,17 @@ public sealed class TermsAlternative
     public string Note { get; init; } = "";
 }
 
+/// <summary>Version details for one package of an entry whose packages changed terms at different versions.</summary>
+public sealed class PackageVersionOverride
+{
+    public string AffectedVersions { get; init; } = "";
+    public string LastFreeVersion { get; init; } = "";
+
+    [JsonIgnore]
+    public VersionRange Range => _range ??= VersionRange.Parse(AffectedVersions);
+    private VersionRange? _range;
+}
+
 public sealed class TermsEntry
 {
     public string Id { get; init; } = "";
@@ -33,18 +44,38 @@ public sealed class TermsEntry
     public string Source { get; init; } = "";
     public TermsAlternative[] Alternatives { get; init; } = [];
 
+    /// <summary>
+    /// Optional per-package versions, for families where each package changed terms at its own major version
+    /// (for example SixLabors.ImageSharp 3.0 but SixLabors.Fonts 2.0). Packages not listed use the entry's values.
+    /// </summary>
+    public Dictionary<string, PackageVersionOverride> PackageVersions { get; init; } = [];
+
     [JsonIgnore]
     public VersionRange Range => _range ??= VersionRange.Parse(AffectedVersions);
     private VersionRange? _range;
 
     /// <summary>Readable form of <see cref="AffectedVersions"/>, for example "15.0.0 and later".</summary>
-    public string AffectedVersionsText =>
-        Range switch
-        {
-            { HasLowerBound: true, HasUpperBound: false } r => $"{r.MinVersion!.Version.ToString(3)} and later",
-            { HasLowerBound: true, HasUpperBound: true } r => $"{r.MinVersion!.Version.ToString(3)} to {r.MaxVersion!.Version.ToString(3)}",
-            _ => AffectedVersions,
-        };
+    public string AffectedVersionsText => Describe(Range, AffectedVersions);
+
+    public VersionRange RangeFor(string packageId) => Override(packageId)?.Range ?? Range;
+
+    public string LastFreeVersionFor(string packageId) => Override(packageId)?.LastFreeVersion ?? LastFreeVersion;
+
+    public string AffectedVersionsFor(string packageId) => Override(packageId)?.AffectedVersions ?? AffectedVersions;
+
+    public string AffectedVersionsTextFor(string packageId) =>
+        Override(packageId) is { } o ? Describe(o.Range, o.AffectedVersions) : AffectedVersionsText;
+
+    private PackageVersionOverride? Override(string packageId) =>
+        PackageVersions.FirstOrDefault(p => string.Equals(p.Key, packageId, StringComparison.OrdinalIgnoreCase)).Value;
+
+    private static string Describe(VersionRange range, string text) => range switch
+    {
+        { HasLowerBound: true, HasUpperBound: false } r when r.MinVersion!.Major == 0 && r.MinVersion.Minor == 0 && r.MinVersion.Patch == 0 => "all versions",
+        { HasLowerBound: true, HasUpperBound: false } r => $"{r.MinVersion!.Version.ToString(3)} and later",
+        { HasLowerBound: true, HasUpperBound: true } r => $"{r.MinVersion!.Version.ToString(3)} to {r.MaxVersion!.Version.ToString(3)}",
+        _ => text,
+    };
 
     public bool DirectOnly => string.Equals(AppliesTo, "direct", StringComparison.OrdinalIgnoreCase);
 

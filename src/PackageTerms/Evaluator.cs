@@ -1,3 +1,5 @@
+using NuGet.Versioning;
+
 namespace PackageTerms;
 
 public static class Evaluator
@@ -65,13 +67,14 @@ public static class Evaluator
             return viaSameFamily ? null : FindingStatus.TransitiveExempt;
         }
 
-        if (entry.Range.Satisfies(package.Version))
+        VersionRange range = entry.RangeFor(package.Id);
+        if (range.Satisfies(package.Version))
         {
             return FindingStatus.Affected;
         }
 
         // A free version referenced directly: the next major upgrade would cross into the new terms.
-        bool upgradeCrosses = entry.Range.MinVersion is { } min && package.Version < min;
+        bool upgradeCrosses = range.MinVersion is { } min && package.Version < min;
         return package.IsDirect && upgradeCrosses ? FindingStatus.UpgradeRisk : null;
     }
 }

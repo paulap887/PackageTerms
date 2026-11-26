@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-02",
+  "updated": "2026-11-26",
   "entries": [
     {
       "id": "polly-osmf",
@@ -89,6 +89,230 @@
         { "package": "AwesomeAssertions", "note": "Community fork of FluentAssertions v7 (Apache-2.0)." },
         { "package": "Shouldly", "note": "Assertion library (BSD-3-Clause)." },
         { "package": "FluentAssertions 7.2.2", "note": "Last Apache-2.0 release." }
+      ]
+    },
+    {
+      "id": "questpdf-commercial",
+      "name": "QuestPDF",
+      "packages": [ "QuestPDF" ],
+      "kind": "commercial",
+      "affectedVersions": "[2023.4.0-0, )",
+      "effectiveDate": "2023-05-04",
+      "lastFreeVersion": "2022.12.15",
+      "appliesTo": "direct",
+      "summary": "From 2023.4.0, QuestPDF is dual-licensed: a free Community MIT licence for eligible users and a paid Professional or Enterprise licence for everyone else. The 2022.12.x line is MIT.",
+      "whoPays": "Organisations with US$1M or more annual gross revenue, and public-sector bodies and publicly traded companies regardless of revenue. Free Community licence for individuals, small businesses under US$1M, non-profits, open-source projects and transitive dependency users.",
+      "source": "https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE.md",
+      "alternatives": [
+        { "package": "QuestPDF 2022.12.15", "note": "Last MIT release." }
+      ]
+    },
+    {
+      "id": "sixlabors-split-licence",
+      "name": "Six Labors (ImageSharp)",
+      "packages": [ "SixLabors.ImageSharp", "SixLabors.ImageSharp.Drawing", "SixLabors.Fonts", "SixLabors.ImageSharp.Web" ],
+      "kind": "commercial",
+      "affectedVersions": "[3.0.0-0, )",
+      "effectiveDate": "2023-03-01",
+      "lastFreeVersion": "2.1.13",
+      "packageVersions": {
+        "SixLabors.ImageSharp.Drawing": { "affectedVersions": "[2.0.0-0, )", "lastFreeVersion": "1.0.0" },
+        "SixLabors.Fonts": { "affectedVersions": "[2.0.0-0, )", "lastFreeVersion": "1.0.1" },
+        "SixLabors.ImageSharp.Web": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.0.2" }
+      },
+      "appliesTo": "direct",
+      "summary": "From ImageSharp 3, ImageSharp.Web 3, ImageSharp.Drawing 2 and Fonts 2, Six Labors packages use the Six Labors Split License: Apache-2.0 for qualifying users, a paid commercial licence for others. Earlier versions are Apache-2.0.",
+      "whoPays": "For-profit companies and individuals with US$1M or more annual gross revenue that reference a Six Labors package directly in closed-source software. Free under Apache-2.0 for open-source software, non-profits, companies under US$1M, and transitive use through an unrelated third-party package.",
+      "source": "https://github.com/SixLabors/ImageSharp/blob/main/LICENSE",
+      "alternatives": [
+        { "package": "SkiaSharp", "note": "2D graphics and image processing (MIT)." },
+        { "package": "Magick.NET-Q8-AnyCPU", "note": "ImageMagick wrapper (Apache-2.0)." },
+        { "package": "NetVips", "note": "libvips binding (MIT)." }
+      ]
+    },
+    {
+      "id": "epplus-polyform",
+      "name": "EPPlus",
+      "packages": [ "EPPlus" ],
+      "kind": "commercial",
+      "affectedVersions": "[5.0.0-0, )",
+      "effectiveDate": "2020-03-08",
+      "lastFreeVersion": "4.5.3.3",
+      "appliesTo": "any",
+      "summary": "From v5, EPPlus is licensed under the Polyform Noncommercial License 1.0.0, with a paid commercial licence from EPPlus Software. v4 and earlier are LGPL.",
+      "whoPays": "Any commercial use of v5 or later requires a paid EPPlus commercial licence. Polyform Noncommercial covers personal and non-commercial use only.",
+      "source": "https://github.com/EPPlusSoftware/EPPlus/blob/develop8/license.md",
+      "alternatives": [
+        { "package": "ClosedXML", "note": "Excel workbooks (MIT)." },
+        { "package": "MiniExcel", "note": "Fast Excel reading and writing (Apache-2.0)." },
+        { "package": "DocumentFormat.OpenXml", "note": "Microsoft's Open XML SDK (MIT)." },
+        { "package": "EPPlus 4.5.3.3", "note": "Last LGPL release." }
+      ]
+    },
+    {
+      "id": "xceed-wpf-toolkit-community",
+      "name": "Extended WPF Toolkit",
+      "packages": [ "Extended.Wpf.Toolkit" ],
+      "kind": "commercial",
+      "affectedVersions": "[4.0.0-0, )",
+      "effectiveDate": "2020-06-26",
+      "lastFreeVersion": "3.8.2",
+      "appliesTo": "any",
+      "summary": "From v4, the Extended WPF Toolkit uses the Xceed Community License Agreement, which allows non-commercial use only. v3.8.2 and earlier are MS-PL.",
+      "whoPays": "Any commercial use of v4 or later requires a paid licence from Xceed (Xceed Toolkit Plus).",
+      "source": "https://github.com/xceedsoftware/wpftoolkit/blob/master/license.md",
+      "alternatives": [
+        { "package": "DotNetProjects.Extended.Wpf.Toolkit", "note": "Community fork of the MS-PL toolkit (MS-PL)." },
+        { "package": "Extended.Wpf.Toolkit 3.8.2", "note": "Last MS-PL release." }
+      ]
+    },
+    {
+      "id": "blazorise-commercial",
+      "name": "Blazorise",
+      "packages": [ "Blazorise" ],
+      "packagePrefixes": [ "Blazorise." ],
+      "kind": "commercial",
+      "affectedVersions": "[0.9.4.4-0, )",
+      "effectiveDate": "2021-09-08",
+      "lastFreeVersion": "0.9.4.3",
+      "appliesTo": "any",
+      "summary": "From 0.9.4.4, Blazorise packages use the Blazorise Software License Agreement: a free Community licence for individuals and a paid per-developer commercial licence. 0.9.4.3 and earlier are Apache-2.0.",
+      "whoPays": "Companies, non-profits, government bodies and freelancers doing client work, at any size (per developer). The free Community licence covers individuals only, with row and item limits on some components.",
+      "source": "https://blazorise.com/pricing",
+      "alternatives": [
+        { "package": "MudBlazor", "note": "Material Design component library (MIT)." },
+        { "package": "Radzen.Blazor", "note": "Blazor component library (MIT)." },
+        { "package": "Microsoft.FluentUI.AspNetCore.Components", "note": "Microsoft's Fluent UI Blazor components (MIT)." }
+      ]
+    },
+    {
+      "id": "nbomber-business",
+      "name": "NBomber",
+      "packages": [ "NBomber" ],
+      "kind": "commercial",
+      "affectedVersions": "[5.0.0-0, )",
+      "effectiveDate": "2023-05-16",
+      "lastFreeVersion": "4.1.2",
+      "appliesTo": "any",
+      "summary": "From v5, NBomber uses the NBomber Business License Agreement. Personal use is free; organisations need a paid licence. v4 and earlier are Apache-2.0.",
+      "whoPays": "Any organisation using NBomber v5 or later needs a licence (one licence covers the whole organisation). Free for personal use only.",
+      "source": "https://github.com/PragmaticFlow/NBomber",
+      "alternatives": [
+        { "package": "NBomber 4.1.2", "note": "Last Apache-2.0 release." }
+      ]
+    },
+    {
+      "id": "wix-osmf",
+      "name": "WiX Toolset",
+      "packagePrefixes": [ "WixToolset." ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[6.0.0-0, )",
+      "effectiveDate": "2025-04-07",
+      "lastFreeVersion": "5.0.2",
+      "appliesTo": "any",
+      "summary": "From v6, WiX Toolset binaries on NuGet come with an Open Source Maintenance Fee agreement. The source licence (MS-RL) doesn't change.",
+      "whoPays": "Users who generate revenue with WiX, paid by sponsoring wixtoolset on GitHub. Non-revenue use, and users who already pay the maintainers for support, are exempt.",
+      "source": "https://github.com/wixtoolset/wix#open-source-maintenance-fee",
+      "alternatives": [
+        { "package": "WixToolset.Sdk 5.0.2", "note": "Last release without the maintenance fee." }
+      ]
+    },
+    {
+      "id": "json-everything-osmf",
+      "name": "json-everything",
+      "packages": [ "JsonSchema.Net", "JsonSchema.Net.Generation", "JsonSchema.Net.Generation.DataAnnotations", "JsonSchema.Net.Data", "JsonSchema.Net.DataGeneration", "JsonSchema.Net.OpenApi", "JsonSchema.Net.ArrayExt", "JsonPath.Net", "JsonPointer.Net", "JsonPatch.Net", "JsonLogic", "JsonE.Net", "Json.More.Net", "Yaml2JsonNode" ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[9.0.0-0, )",
+      "effectiveDate": "2026-02-01",
+      "lastFreeVersion": "8.0.5",
+      "packageVersions": {
+        "JsonSchema.Net.Generation": { "affectedVersions": "[7.0.0-0, )", "lastFreeVersion": "6.0.0" },
+        "JsonSchema.Net.Generation.DataAnnotations": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.0.0" },
+        "JsonSchema.Net.Data": { "affectedVersions": "[9.0.0-0, )", "lastFreeVersion": "8.0.0" },
+        "JsonSchema.Net.DataGeneration": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.3.1" },
+        "JsonSchema.Net.OpenApi": { "affectedVersions": "[5.0.0-0, )", "lastFreeVersion": "4.0.0" },
+        "JsonSchema.Net.ArrayExt": { "affectedVersions": "[4.0.0-0, )", "lastFreeVersion": "3.0.1" },
+        "JsonPath.Net": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.2.0" },
+        "JsonPointer.Net": { "affectedVersions": "[7.0.0-0, )", "lastFreeVersion": "6.0.1" },
+        "JsonPatch.Net": { "affectedVersions": "[5.0.0-0, )", "lastFreeVersion": "4.0.1" },
+        "JsonLogic": { "affectedVersions": "[6.0.0-0, )", "lastFreeVersion": "5.5.0" },
+        "JsonE.Net": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.5.1" },
+        "Json.More.Net": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.2.0" },
+        "Yaml2JsonNode": { "affectedVersions": "[3.0.0-0, )", "lastFreeVersion": "2.4.0" }
+      },
+      "appliesTo": "any",
+      "summary": "From the February 2026 releases (JsonSchema.Net 9, JsonPath.Net 3, JsonPointer.Net 7 and the rest), json-everything packages come with an Open Source Maintenance Fee agreement. The source licence (MIT) doesn't change.",
+      "whoPays": "All organisations or users of any json-everything library who generate revenue with it, as a monthly fee. Non-revenue use, and users who already pay the maintainers at least the fee, are exempt.",
+      "source": "https://github.com/json-everything/json-everything#project-funding--sponsorship",
+      "alternatives": [
+        { "package": "System.Text.Json", "note": "Built into .NET for JSON parsing and serialisation (MIT); no JSON Schema validation." }
+      ]
+    },
+    {
+      "id": "verify-osmf",
+      "name": "Verify",
+      "packages": [ "Verify" ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[33.0.0-0, )",
+      "effectiveDate": "2026-09-12",
+      "lastFreeVersion": "32.0.1",
+      "appliesTo": "any",
+      "summary": "Verify versions released after 1 Sep 2026 (v33 and later) come with an Open Source Maintenance Fee agreement, checked at build time. The source licence (MIT) doesn't change. Test-framework adapters such as Verify.XunitV3 stay MIT but depend on Verify.",
+      "whoPays": "Organisations using Verify in revenue-generating work with annual gross revenue of US$10,000 or more, and government agencies: US$5 to US$100 per month by organisation size, paid through GitHub Sponsors.",
+      "source": "https://github.com/VerifyTests/Verify#open-source-maintenance-fee",
+      "alternatives": [
+        { "package": "Verify 32.0.1", "note": "Last release without the maintenance fee." }
+      ]
+    },
+    {
+      "id": "thisassembly-osmf",
+      "name": "ThisAssembly (Devlooped)",
+      "packages": [ "ThisAssembly" ],
+      "packagePrefixes": [ "ThisAssembly." ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[2.1.0-0, )",
+      "effectiveDate": "2025-10-16",
+      "lastFreeVersion": "2.0.14",
+      "appliesTo": "any",
+      "summary": "From 2.1.0, ThisAssembly packages come with an Open Source Maintenance Fee agreement. The source licence (MIT) doesn't change.",
+      "whoPays": "Users who generate revenue with the packages, paid by sponsoring Devlooped on GitHub at the OSMF tier. One fee covers all Devlooped packages.",
+      "source": "https://github.com/devlooped/ThisAssembly#open-source-maintenance-fee",
+      "alternatives": [
+        { "package": "ThisAssembly 2.0.14", "note": "Last release without the maintenance fee." }
+      ]
+    },
+    {
+      "id": "npoi-osmf",
+      "name": "NPOI",
+      "packages": [ "NPOI" ],
+      "kind": "maintenance-fee",
+      "affectedVersions": "[2.8.0-0, )",
+      "effectiveDate": "2026-04-06",
+      "lastFreeVersion": "2.7.6",
+      "appliesTo": "any",
+      "summary": "From 2.8.0, NPOI packages come with an Open Source Maintenance Fee agreement. The source licence (Apache-2.0) doesn't change.",
+      "whoPays": "Users of NPOI in revenue-generating activities with annual gross revenue of US$10,000 or more, as a monthly fee through GitHub Sponsors.",
+      "source": "https://github.com/nissl-lab/npoi",
+      "alternatives": [
+        { "package": "ClosedXML", "note": "Excel workbooks (MIT)." },
+        { "package": "DocumentFormat.OpenXml", "note": "Microsoft's Open XML SDK (MIT)." },
+        { "package": "NPOI 2.7.6", "note": "Last release without the maintenance fee." }
+      ]
+    },
+    {
+      "id": "duende-identityserver",
+      "name": "Duende IdentityServer",
+      "packagePrefixes": [ "Duende.IdentityServer" ],
+      "kind": "commercial",
+      "affectedVersions": "[0.0.0-0, )",
+      "effectiveDate": "2021-01-13",
+      "lastFreeVersion": "None. The free predecessor, IdentityServer4 (last release 4.1.2, Apache-2.0), is no longer supported.",
+      "appliesTo": "any",
+      "summary": "Duende IdentityServer, the successor to IdentityServer4, is commercial software. A free Community Edition covers small companies and non-profits; development, testing and personal projects need no licence.",
+      "whoPays": "Organisations with US$1M or more projected annual gross revenue or US$3M or more in capital, non-profits with budgets of US$1M or more, and anyone redistributing IdentityServer to third parties. Others can apply for the free Community Edition licence key.",
+      "source": "https://duendesoftware.com/products/communityedition",
+      "alternatives": [
+        { "package": "OpenIddict.AspNetCore", "note": "OpenID Connect server and client for ASP.NET Core (Apache-2.0)." }
       ]
     }
   ]

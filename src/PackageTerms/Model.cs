@@ -32,4 +32,10 @@ public sealed record Finding(
 {
     /// <summary>Full paths of the projects in <see cref="Projects"/>, in the same order.</summary>
     public IReadOnlyList<string> ProjectPaths { get; init; } = [];
+
+    public string LastFreeVersion => Entry.LastFreeVersionFor(PackageId);
+
+    public string AffectedVersions => Entry.AffectedVersionsFor(PackageId);
+
+    public string AffectedVersionsText => Entry.AffectedVersionsTextFor(PackageId);
 }

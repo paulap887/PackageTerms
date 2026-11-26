@@ -30,7 +30,7 @@ public static class Reporters
             if (f.Status != FindingStatus.TransitiveExempt)
             {
                 output.WriteLine($"  Who pays: {f.Entry.WhoPays}");
-                output.WriteLine($"  Last free version: {f.Entry.LastFreeVersion}");
+                output.WriteLine($"  Last free version: {f.LastFreeVersion}");
                 foreach (TermsAlternative alt in f.Entry.Alternatives)
                 {
                     output.WriteLine($"  Alternative: {alt.Package}: {alt.Note}");
@@ -67,7 +67,7 @@ public static class Reporters
                 FindingStatus.UpgradeRisk => "🟡 Upgrade risk",
                 _ => "🟢 No action",
             };
-            output.WriteLine($"| {status} | {f.PackageId} {f.Version} | {Reference(f)} | {Explain(f)} [Source]({f.Entry.Source}) | {f.Entry.LastFreeVersion} |");
+            output.WriteLine($"| {status} | {f.PackageId} {f.Version} | {Reference(f)} | {Explain(f)} [Source]({f.Entry.Source}) | {f.LastFreeVersion} |");
         }
 
         output.WriteLine();
@@ -89,9 +89,9 @@ public static class Reporters
                 projects = f.Projects,
                 entry = f.Entry.Id,
                 kind = f.Entry.Kind,
-                affectedVersions = f.Entry.AffectedVersions,
+                affectedVersions = f.AffectedVersions,
                 effectiveDate = f.Entry.EffectiveDate,
-                lastFreeVersion = f.Entry.LastFreeVersion,
+                lastFreeVersion = f.LastFreeVersion,
                 summary = f.Entry.Summary,
                 whoPays = f.Entry.WhoPays,
                 source = f.Entry.Source,
@@ -235,7 +235,7 @@ public static class Reporters
     {
         FindingStatus.Affected => f.Entry.Summary,
         FindingStatus.UpgradeRisk =>
-            $"Your version is still free, but {f.Entry.Name} {f.Entry.AffectedVersionsText} {(f.Entry.Kind == "maintenance-fee" ? "carries" : "is")} {(f.Entry.Kind == "maintenance-fee" ? "a maintenance fee" : "commercial")} (from {f.Entry.EffectiveDate}). Check the terms before upgrading.",
+            $"Your version is still free, but {f.PackageId} {f.AffectedVersionsText} {(f.Entry.Kind == "maintenance-fee" ? "carries" : "is")} {(f.Entry.Kind == "maintenance-fee" ? "a maintenance fee" : "commercial")} (from {f.Entry.EffectiveDate}). Check the terms before upgrading.",
         _ => $"{f.Entry.Name}'s new terms cover direct references only, so this transitive reference is exempt.",
     };
 

@@ -213,7 +213,11 @@ static void ListDataset(TermsDatabase db)
     {
         string packages = string.Join(", ", e.Packages.Concat(e.PackagePrefixes.Select(p => p + "*")));
         Console.WriteLine($"{e.Name} ({packages})");
-        Console.WriteLine($"  {e.Kind}, versions {e.AffectedVersionsText}, from {e.EffectiveDate}; last free: {e.LastFreeVersion}");
+        Console.WriteLine($"  {e.Kind}, {e.AffectedVersionsText}, from {e.EffectiveDate}; last free: {e.LastFreeVersion}");
+        foreach ((string package, PackageVersionOverride o) in e.PackageVersions)
+        {
+            Console.WriteLine($"  {package}: {e.AffectedVersionsTextFor(package)}; last free: {o.LastFreeVersion}");
+        }
         Console.WriteLine($"  {e.Source}");
     }
 }

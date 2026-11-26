@@ -149,8 +149,20 @@ steps:
 | AutoMapper | Commercial (RPL-1.5 + commercial licence) | 15.0.0 and later | 14.0.0 |
 | MassTransit, MassTransit.* | Commercial (Massient licence) | 9.0.0 and later | 8.5.12 |
 | FluentAssertions | Commercial for commercial use (Xceed) | 8.0.0 and later | 7.2.2 |
+| QuestPDF | Commercial above US$1M revenue (direct references only) | 2023.4.0 and later | 2022.12.15 |
+| SixLabors.ImageSharp, .Drawing, .Fonts, .Web | Six Labors Split License: commercial above US$1M revenue (direct references only) | ImageSharp 3+, Drawing 2+, Fonts 2+, Web 3+ | 2.1.13, 1.0.0, 1.0.1, 2.0.2 |
+| EPPlus | Polyform Noncommercial + commercial licence | 5.0.0 and later | 4.5.3.3 |
+| Extended.Wpf.Toolkit | Non-commercial use only (Xceed Community License) | 4.0.0 and later | 3.8.2 |
+| Blazorise, Blazorise.* | Commercial for organisations (Blazorise SLA) | 0.9.4.4 and later | 0.9.4.3 |
+| NBomber | Commercial for organisations (NBomber Business License) | 5.0.0 and later | 4.1.2 |
+| Duende.IdentityServer* | Commercial (free Community Edition for small organisations) | All versions | None (IdentityServer4 is unsupported) |
+| WixToolset.* | Open Source Maintenance Fee | 6.0.0 and later | 5.0.2 |
+| JsonSchema.Net, JsonPath.Net, JsonPointer.Net and other json-everything packages | Open Source Maintenance Fee | February 2026 majors (JsonSchema.Net 9+, JsonPath.Net 3+, …) | JsonSchema.Net 8.0.5, … |
+| Verify | Open Source Maintenance Fee | 33.0.0 and later | 32.0.1 |
+| ThisAssembly, ThisAssembly.* | Open Source Maintenance Fee | 2.1.0 and later | 2.0.14 |
+| NPOI | Open Source Maintenance Fee | 2.8.0 and later | 2.7.6 |
 
-Every entry links to the project's own announcement or licence. The dataset lives in [`src/PackageTerms/Data/terms.json`](src/PackageTerms/Data/terms.json). If a package is missing or a detail is out of date, please open an issue or a pull request with a link to the official source.
+Every entry links to the project's own announcement or licence, and each version boundary is checked against the licence NuGet records for every published version. Run `package-terms --list` for the per-package versions. The dataset lives in [`src/PackageTerms/Data/terms.json`](src/PackageTerms/Data/terms.json). If a package is missing or a detail is out of date, please open an issue or a pull request with a link to the official source.
 
 ## Disclaimer
 

@@ -66,8 +66,8 @@ public static partial class Sarif
             string reference = f.IsDirect ? "direct" : f.Via.Count > 0 ? $"transitive via {string.Join(" → ", f.Via)}" : "transitive";
             string text = f.Status switch
             {
-                FindingStatus.Affected => $"{f.PackageId} {f.Version} ({reference}): {f.Entry.Summary} Last free version: {f.Entry.LastFreeVersion}. Source: {f.Entry.Source}",
-                FindingStatus.UpgradeRisk => $"{f.PackageId} {f.Version} is still free, but {f.Entry.Name} {f.Entry.AffectedVersionsText} is covered by changed terms (from {f.Entry.EffectiveDate}). Source: {f.Entry.Source}",
+                FindingStatus.Affected => $"{f.PackageId} {f.Version} ({reference}): {f.Entry.Summary} Last free version: {f.LastFreeVersion}. Source: {f.Entry.Source}",
+                FindingStatus.UpgradeRisk => $"{f.PackageId} {f.Version} is still free, but {f.PackageId} {f.AffectedVersionsText} is covered by changed terms (from {f.Entry.EffectiveDate}). Source: {f.Entry.Source}",
                 _ => $"{f.PackageId} {f.Version} ({reference}): {f.Entry.Name}'s new terms cover direct references only, so this reference is exempt. Source: {f.Entry.Source}",
             };
 
@@ -84,7 +84,7 @@ public static partial class Sarif
                     version = f.Version.ToNormalizedString(),
                     direct = f.IsDirect,
                     entry = f.Entry.Id,
-                    lastFreeVersion = f.Entry.LastFreeVersion,
+                    lastFreeVersion = f.LastFreeVersion,
                     source = f.Entry.Source,
                 },
             });
