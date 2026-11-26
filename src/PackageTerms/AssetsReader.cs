@@ -26,6 +26,7 @@ public static class AssetsReader
         // Targets with a "/" are runtime-specific copies of the same graph.
         var targetKeys = targets.EnumerateObject().Select(t => t.Name).Where(n => !n.Contains('/')).ToList();
         var frameworkList = frameworks.EnumerateObject().ToList();
+        Dictionary<string, string> packageDirs = PackageDirectories(root);
 
         for (int i = 0; i < targetKeys.Count; i++)
         {
@@ -56,13 +57,40 @@ public static class AssetsReader
                 }
             }
 
-            graphs.Add(new ProjectGraph(projectPath, framework.Name, ReadTarget(targets.GetProperty(targetKey), direct)));
+            graphs.Add(new ProjectGraph(projectPath, framework.Name, ReadTarget(targets.GetProperty(targetKey), direct, packageDirs)));
         }
 
         return graphs;
     }
 
-    private static List<ResolvedPackage> ReadTarget(JsonElement target, HashSet<string> direct)
+    /// <summary>
+    /// Maps "Id/Version" to the package's folder on disk, using "libraries" (relative paths) and "packageFolders"
+    /// (the global packages folder first, then any fallback folders).
+    /// </summary>
+    private static Dictionary<string, string> PackageDirectories(JsonElement root)
+    {
+        var dirs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (!root.TryGetProperty("libraries", out JsonElement libraries) ||
+            !root.TryGetProperty("packageFolders", out JsonElement folders))
+        {
+            return dirs;
+        }
+
+        var folderList = folders.EnumerateObject().Select(f => f.Name).ToList();
+        foreach (JsonProperty lib in libraries.EnumerateObject())
+        {
+            if (lib.Value.TryGetProperty("type", out JsonElement t) && t.GetString() == "package" &&
+                lib.Value.TryGetProperty("path", out JsonElement p) && p.GetString() is { Length: > 0 } relative &&
+                folderList.Select(f => Path.Combine(f, relative)).FirstOrDefault(System.IO.Directory.Exists) is { } dir)
+            {
+                dirs[lib.Name] = dir;
+            }
+        }
+
+        return dirs;
+    }
+
+    private static List<ResolvedPackage> ReadTarget(JsonElement target, HashSet<string> direct, Dictionary<string, string> packageDirs)
     {
         var versions = new Dictionary<string, NuGetVersion>(StringComparer.OrdinalIgnoreCase);
         var children = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
@@ -105,7 +133,9 @@ public static class AssetsReader
                 v.Key,
                 v.Value,
                 direct.Contains(v.Key),
-                paths.TryGetValue(v.Key, out List<string>? via) ? via : []))
+                paths.TryGetValue(v.Key, out List<string>? via) ? via : [],
+                packageDirs.GetValueOrDefault($"{v.Key}/{v.Value.OriginalVersion ?? v.Value.ToNormalizedString()}")
+                    ?? packageDirs.GetValueOrDefault($"{v.Key}/{v.Value.ToNormalizedString()}")))
             .ToList();
     }
 

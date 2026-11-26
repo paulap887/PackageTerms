@@ -11,10 +11,10 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>package-terms</ToolCommandName>
     <PackageId>PackageTerms</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Paul Thomas</Authors>
-    <Description>Finds NuGet dependencies whose terms changed: packages that went commercial or added a maintenance fee (Polly, MediatR, AutoMapper, MassTransit, FluentAssertions…). Shows whether you're affected, the last free version and free alternatives.</Description>
-    <PackageTags>nuget;license;licence;compliance;dependencies;polly;osmf;mediatr;automapper;dotnet-tool</PackageTags>
+    <Description>Finds NuGet dependencies whose terms changed: packages that went commercial or added a maintenance fee (Polly, MediatR, AutoMapper, MassTransit, FluentAssertions, QuestPDF, ImageSharp, EPPlus, Duende IdentityServer…). Shows whether you're affected, the last free version and free alternatives.</Description>
+    <PackageTags>nuget;license;licence;compliance;dependencies;lockfile;polly;osmf;mediatr;automapper;questpdf;imagesharp;epplus;sarif;dotnet-tool</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>

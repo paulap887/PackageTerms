@@ -1,3 +1,5 @@
+using NuGet.Versioning;
+
 namespace PackageTerms;
 
 public static class Evaluator
@@ -26,12 +28,19 @@ public static class Evaluator
                 {
                     if (!existing.Projects.Contains(project))
                     {
-                        findings[key] = existing with { Projects = [.. existing.Projects, project] };
+                        findings[key] = existing with
+                        {
+                            Projects = [.. existing.Projects, project],
+                            ProjectPaths = [.. existing.ProjectPaths, graph.ProjectPath],
+                        };
                     }
                 }
                 else
                 {
-                    findings[key] = new Finding(entry, status, package.Id, package.Version, package.IsDirect, package.Via, [project]);
+                    findings[key] = new Finding(entry, status, package.Id, package.Version, package.IsDirect, package.Via, [project])
+                    {
+                        ProjectPaths = [graph.ProjectPath],
+                    };
                 }
             }
         }
@@ -58,13 +67,14 @@ public static class Evaluator
             return viaSameFamily ? null : FindingStatus.TransitiveExempt;
         }
 
-        if (entry.Range.Satisfies(package.Version))
+        VersionRange range = entry.RangeFor(package.Id);
+        if (range.Satisfies(package.Version))
         {
             return FindingStatus.Affected;
         }
 
         // A free version referenced directly: the next major upgrade would cross into the new terms.
-        bool upgradeCrosses = entry.Range.MinVersion is { } min && package.Version < min;
+        bool upgradeCrosses = range.MinVersion is { } min && package.Version < min;
         return package.IsDirect && upgradeCrosses ? FindingStatus.UpgradeRisk : null;
     }
 }
