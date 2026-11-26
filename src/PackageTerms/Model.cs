@@ -3,7 +3,8 @@ using NuGet.Versioning;
 namespace PackageTerms;
 
 /// <summary>A package resolved by NuGet restore for one target framework of one project.</summary>
-public sealed record ResolvedPackage(string Id, NuGetVersion Version, bool IsDirect, IReadOnlyList<string> Via);
+/// <param name="Directory">The package's folder in the global packages folder, when restore output names one that exists.</param>
+public sealed record ResolvedPackage(string Id, NuGetVersion Version, bool IsDirect, IReadOnlyList<string> Via, string? Directory = null);
 
 /// <summary>The restore result for one project and target framework.</summary>
 public sealed record ProjectGraph(string ProjectPath, string TargetFramework, IReadOnlyList<ResolvedPackage> Packages);

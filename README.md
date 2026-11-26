@@ -50,6 +50,8 @@ package-terms scan --format markdown    # for pull-request comments
 package-terms scan --format json        # for scripts
 package-terms scan --fail-on affected   # exit code 1 in CI when an affected package is found
 package-terms --list                    # show the built-in dataset
+package-terms lock                      # write packages.licenses.json
+package-terms lock --check              # exit code 1 in CI when a licence or terms changed
 ```
 
 `package-terms` reads the restore output (`obj/project.assets.json`), so it sees exactly the versions NuGet resolved, including Central Package Management, `Directory.Build.props` and transitive dependencies. Projects that haven't been restored are restored automatically. Pass `--no-restore` to skip that.
@@ -67,14 +69,46 @@ package-terms --list                    # show the built-in dataset
 | Code | Meaning |
 |---|---|
 | 0 | Scan completed (and nothing reached the `--fail-on` level) |
-| 1 | A finding reached the `--fail-on` level |
-| 2 | Invalid arguments or no projects found |
+| 1 | A finding reached the `--fail-on` level, or `lock --check` found a licence or terms change |
+| 2 | Invalid arguments, no projects found, or no lockfile for `lock --check` |
+
+### Licence lockfile
+
+The dataset covers packages whose terms are known to have changed. To catch the next one, commit a licence lockfile:
+
+```bash
+package-terms lock
+```
+
+This writes `packages.licenses.json` next to your solution: every package version NuGet resolved, the licence its `.nuspec` declares (an SPDX expression, a licence file with a SHA-256 of its text, or a licence URL), and any changed terms from the dataset. It's sorted and stable, so it diffs cleanly in pull requests.
+
+In CI, `package-terms lock --check` compares the resolved packages with the committed file and exits with code 1 when:
+
+- **a package's licence changed**: an upgrade declares a licence the lockfile has never recorded for that package, or its licence file was reworded
+- **a package's terms changed**: the licence label is the same, but the new version is covered by changed terms (Polly 9's maintenance fee keeps BSD-3-Clause)
+- **a new package is covered by changed terms**
+
+Upgrades that keep the same licence, new packages with ordinary licences, and removed packages are listed but don't fail the check. After reviewing a change, run `package-terms lock` again and commit the file.
+
+```
+$ package-terms lock --check
+[LICENCE CHANGED] MediatR 12.4.1 → 13.1.0
+  Licence: Apache-2.0 → file:LICENSE.md
+  Now covered by changed terms: mediatr-commercial (run "package-terms scan" for details)
+[NEW PACKAGE] Microsoft.Extensions.Logging.Abstractions 8.0.0
+  Licence: MIT
+
+1 change(s) need review. Check the new terms, then run "package-terms lock" and commit packages.licenses.json.
+```
+
+Use `--lockfile <file>` for a different location, and `--format markdown` for a pull-request comment.
 
 ### GitHub Actions
 
 ```yaml
 - run: dotnet tool install -g PackageTerms
 - run: package-terms scan --fail-on affected
+- run: package-terms lock --check
 ```
 
 ## Built-in dataset
