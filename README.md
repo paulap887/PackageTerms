@@ -48,6 +48,7 @@ package-terms scan                      # solution or projects in the current fo
 package-terms scan MySolution.sln       # .sln, .slnx or a project file
 package-terms scan --format markdown    # for pull-request comments
 package-terms scan --format json        # for scripts
+package-terms scan --format sarif       # for GitHub code scanning and Azure DevOps
 package-terms scan --fail-on affected   # exit code 1 in CI when an affected package is found
 package-terms --list                    # show the built-in dataset
 package-terms lock                      # write packages.licenses.json
@@ -101,7 +102,7 @@ $ package-terms lock --check
 1 change(s) need review. Check the new terms, then run "package-terms lock" and commit packages.licenses.json.
 ```
 
-Use `--lockfile <file>` for a different location, and `--format markdown` for a pull-request comment.
+Use `--lockfile <file>` for a different location, `--format markdown` for a pull-request comment, and `--format sarif` for code scanning.
 
 ### GitHub Actions
 
@@ -110,6 +111,34 @@ Use `--lockfile <file>` for a different location, and `--format markdown` for a 
 - run: package-terms scan --fail-on affected
 - run: package-terms lock --check
 ```
+
+### GitHub code scanning (SARIF)
+
+`--format sarif` writes [SARIF 2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html), so findings show up as code scanning alerts and pull-request annotations. A direct reference points at its `PackageReference` line in the project file; `lock --check` results point at `packages.licenses.json`. Run it from the repository root so paths resolve.
+
+```yaml
+permissions:
+  security-events: write
+steps:
+  - uses: actions/checkout@v5
+  - uses: actions/setup-dotnet@v5
+  - run: dotnet tool install -g PackageTerms
+  - run: package-terms scan --format sarif > package-terms.sarif
+  - uses: github/codeql-action/upload-sarif@v4
+    with:
+      sarif_file: package-terms.sarif
+      category: package-terms
+```
+
+| Rule | Level | Meaning |
+|---|---|---|
+| PT001 | error | Commercial licence applies to the resolved version |
+| PT002 | error | Maintenance fee applies to the resolved version |
+| PT003 | warning | Upgrade risk: a newer major version is covered |
+| PT004 | note | Covered package, but this transitive reference is exempt |
+| PT101 | error | `lock --check`: a package's licence changed |
+| PT102 | error | `lock --check`: a package's terms changed |
+| PT103 | error | `lock --check`: a new package is covered by changed terms |
 
 ## Built-in dataset
 

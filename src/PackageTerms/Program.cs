@@ -13,7 +13,7 @@ const string Usage = """
       path                 A .sln, .slnx or project file, or a folder (default: current folder)
 
     Options:
-      --format <format>    console (default), markdown or json
+      --format <format>    console (default), markdown, json or sarif
       --fail-on <level>    scan: exit with code 1 when findings reach this level: affected, upgrade-risk or none (default)
       --check              lock: don't write; exit 1 if a package's licence or terms changed
       --lockfile <file>    lock: lockfile path (default: packages.licenses.json next to the solution or project)
@@ -75,7 +75,7 @@ while (queue.Count > 0)
     }
 }
 
-if (format is not ("console" or "markdown" or "json") || failOn is not ("affected" or "upgrade-risk" or "none"))
+if (format is not ("console" or "markdown" or "json" or "sarif") || failOn is not ("affected" or "upgrade-risk" or "none"))
 {
     Console.Error.WriteLine($"Invalid --format or --fail-on value.\n\n{Usage}");
     return 2;
@@ -120,6 +120,9 @@ try
             break;
         case "json":
             Reporters.WriteJson(findings, scanned, Console.Out);
+            break;
+        case "sarif":
+            Sarif.WriteScan(findings, Console.Out, Environment.CurrentDirectory);
             break;
         default:
             Reporters.WriteConsole(findings, scanned, Console.Out, color: !Console.IsOutputRedirected);
@@ -167,6 +170,9 @@ static int Lock(IReadOnlyList<ProjectGraph> graphs, TermsDatabase db, string loc
                 break;
             case "json":
                 Reporters.WriteLockChangesJson(changes, Console.Out);
+                break;
+            case "sarif":
+                Sarif.WriteLockChanges(changes, lockfilePath, Console.Out, Environment.CurrentDirectory);
                 break;
             default:
                 Reporters.WriteLockChangesConsole(changes, name, Console.Out, color: !Console.IsOutputRedirected);

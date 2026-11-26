@@ -28,4 +28,8 @@ public sealed record Finding(
     NuGetVersion Version,
     bool IsDirect,
     IReadOnlyList<string> Via,
-    IReadOnlyList<string> Projects);
+    IReadOnlyList<string> Projects)
+{
+    /// <summary>Full paths of the projects in <see cref="Projects"/>, in the same order.</summary>
+    public IReadOnlyList<string> ProjectPaths { get; init; } = [];
+}

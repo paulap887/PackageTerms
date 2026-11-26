@@ -26,12 +26,19 @@ public static class Evaluator
                 {
                     if (!existing.Projects.Contains(project))
                     {
-                        findings[key] = existing with { Projects = [.. existing.Projects, project] };
+                        findings[key] = existing with
+                        {
+                            Projects = [.. existing.Projects, project],
+                            ProjectPaths = [.. existing.ProjectPaths, graph.ProjectPath],
+                        };
                     }
                 }
                 else
                 {
-                    findings[key] = new Finding(entry, status, package.Id, package.Version, package.IsDirect, package.Via, [project]);
+                    findings[key] = new Finding(entry, status, package.Id, package.Version, package.IsDirect, package.Via, [project])
+                    {
+                        ProjectPaths = [graph.ProjectPath],
+                    };
                 }
             }
         }
